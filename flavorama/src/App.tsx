@@ -1,11 +1,11 @@
+import {MantineProvider} from '@mantine/core';
 import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
-import { Router } from './Router';
-import { theme } from './theme';
+import {Router} from './router/Router';
+import {theme} from './style/theme';
 
 export default function App() {
   return (
-    <MantineProvider theme={theme}>
+    <MantineProvider defaultColorScheme={'dark'} theme={theme}>
       <Router />
     </MantineProvider>
   );
