@@ -1,13 +1,20 @@
+import {FC} from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import {HomePage} from '@/pages/Home.page';
+import Home from '@/pages/Home';
+import Error from "@/pages/Error";
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: <Home />,
+    errorElement: <Error />
   },
 ]);
 
-export function Router() {
-  return <RouterProvider router={router} />;
+const Router: FC = () => {
+  return (
+    <RouterProvider router={router} />
+  )
 };
+
+export default Router;
