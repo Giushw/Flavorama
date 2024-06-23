@@ -1,39 +1,39 @@
 import {createTheme, type MantineColorsTuple} from '@mantine/core';
 import {generateColors} from '@mantine/colors-generator';
 
-// TODO: hunderstand why the generato colot don't work with these 2 colors
+// generateColors() don't work well with #2F2F2F & #111111
 const jet: MantineColorsTuple = [
   '#2F2F2F',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
+  '#2A2A2A',
+  '#262626',
+  '#212121',
+  '#1c1c1c',
+  '#181818',
+  '#131313',
+  '#0E0E0E',
+  '#090909',
+  '#050505',
 ];
 
 const night: MantineColorsTuple = [
   '#111111',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
-  '#000000',
+  '#0F0F0F',
+  '#0E0E0E',
+  '#0C0C0C',
+  '#0A0A0A',
+  '#090909',
+  '#070707',
+  '#050505',
+  '#030303',
+  '#020202',
 ];
 
 const smoke =  generateColors('#f5f5f5');
 const hunyadi = generateColors('#FFC874');
 
 export const theme = createTheme({
-  /** Put your mantine theme override here */
-  primaryColor: 'green',
+  primaryColor: 'hunyadi',
+  primaryShade: 3,
   colors: {
     smoke,
     jet,
