@@ -13,6 +13,7 @@ import {
 } from '@mantine/core';
 import {Link} from "react-router-dom";
 import Splash from '@/layouts/Splash';
+import LogoGroup from '@/components/common/LogoGroup';
 
 const Home: FC = () => {
   return (
@@ -42,10 +43,7 @@ const LeftSide: FC = () => {
               Escape the ordinary and embark on a culinary adventure with...
             </Text>
 
-            <Group mb={16}>
-              <Image h={50} w={50} src="/assets/Logo.svg"  fit="contain"/>
-              <Title order={2} size='2rem'  c={'hunyadi.3'}>Flavorama</Title>
-            </Group>
+            <LogoGroup mb={16} />
 
             <Text size='xl'>
               Discover a world of delicious recipes, all waiting to be explored.
