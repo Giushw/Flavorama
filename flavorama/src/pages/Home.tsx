@@ -54,7 +54,7 @@ const LeftSide: FC = () => {
           </Container>
 
           <Link to="/search">
-            <Button variant="filled" size='xl' autoContrast>Explore Flavors Now</Button>
+            <Button component='button' variant="filled" size='xl' autoContrast>Explore Flavors Now</Button>
           </Link>
       </Stack>
     </Center>  
