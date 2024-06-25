@@ -1,19 +1,12 @@
 import {FC} from 'react';
 import {
   Card,
-  Image,
   Title,
   Text,
-  List,
   Group,
-  Badge,
-  Button,
-  ActionIcon,
-  rem,
   BackgroundImage,
   Blockquote,
-  Stack,
-  Divider
+  Stack
 } from '@mantine/core';
 import {IconInfoCircle} from '@tabler/icons-react'
 import type {Recipe} from '@/types/decoders/recipes';

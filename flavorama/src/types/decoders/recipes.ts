@@ -8,7 +8,7 @@ export interface Recipe {
   cuisineId: string,
   dietId: string,
   difficultyId: string,
-  image: string, // add localh 8080
+  image: string
 };
 
 export type Recipes = Iterable<Recipe>;
@@ -17,7 +17,7 @@ export interface Comment {
   id: string,
   recipeId: string,
   comment: string,
-  rating: number // da 0 a 5
+  rating: number // from 0 to 5
   date: string // datestring
 };
 

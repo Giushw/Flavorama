@@ -1,7 +1,8 @@
 import {FC, ReactNode} from 'react';
 import {AppShell, Box} from '@mantine/core';
-import {useDisclosure} from '@mantine/hooks';
+import {useDisclosure, useHeadroom} from '@mantine/hooks';
 import Header from '@/components/base/Header';
+import Navigation from '@/components/base/Navigation';
 import Footer from '@/components/base/Footer';
 
 interface DefaultProps {
@@ -11,23 +12,30 @@ interface DefaultProps {
 const Default: FC<DefaultProps> = ({mainSlot}) => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
+
+  const pinned = useHeadroom({ fixedAt: 120 });
   
   return (
     <AppShell
-      header={{height: 100}}
+      transitionTimingFunction="ease-in-out"
+      // header={{height: 100}}
+      header={{ height: 100, collapsed: !pinned, offset: true }}
       navbar={{
         width: 300,
         breakpoint: 'sm',
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
-      footer={{height: 100}}
+      // footer={{height: 100}}
+      footer={{ height: 100, collapsed: pinned, offset: true }}
       padding="md"
     >
       <AppShell.Header bg={'night.1'}>
-        <Header mHandle={toggleMobile} dHandle={toggleDesktop} />
+        <Header mState={mobileOpened} dState={desktopOpened} mHandle={toggleMobile} dHandle={toggleDesktop} />
       </AppShell.Header>
 
-      <AppShell.Navbar p="md" bg={'jet.1'} >Navbar</AppShell.Navbar>
+      <AppShell.Navbar p="md" bg={'night.1'} >
+        <Navigation />
+      </AppShell.Navbar>
 
       <AppShell.Main bg={'night.1'}>
         <Box p={20} w='100%' h='100%'>
