@@ -1,6 +1,9 @@
 import {FC} from "react";
 import {Badge, rem} from "@mantine/core";
 import {IconFlag, IconApple, IconHourglassEmpty} from '@tabler/icons-react';
+import useStoreCuisine from "@/store/cuisine";
+import useStoreDiet from "@/store/diet";
+import useStoreDifficulty from "@/store/difficulty";
 
 type BadgeType = 'cuisine' | 'diet';
 
@@ -19,10 +22,18 @@ interface DifficultyIdProps {
 type BadgeIdProps = CommonIdProps | DifficultyIdProps;
 
 const BadgeId: FC<BadgeIdProps> = ({type, id}) => {
+  const cuisineStore = useStoreCuisine();
+  const dietStore = useStoreDiet();
+  const difficultyStore = useStoreDifficulty();
 
+  const {cuisines} = cuisineStore;
+  const {diets} = dietStore;
+  const {difficulties} = difficultyStore;
 
-  const parseDiffColor = (id: DifficultiesType) => {
-    switch (id) {
+  const parseDiffColor = (id: string) => {
+    const idParser = difficulties ? difficulties.filter((el: { id: string; }) => el.id === id)[0].name : 'ND'
+
+    switch (idParser) {
       case 'Easy':
         return 'teal';
 
@@ -32,8 +43,8 @@ const BadgeId: FC<BadgeIdProps> = ({type, id}) => {
       case 'Hard':
         return 'red';
 
-      default:
-        return 'teal'
+      case 'ND':
+        return 'blue';
     }
   };
 
@@ -45,7 +56,7 @@ const BadgeId: FC<BadgeIdProps> = ({type, id}) => {
     }
   };
 
-  const parseType = () => {
+  const parseIconType = () => {
     const commonProps = { 
       width: rem(12), 
       height: rem(12) 
@@ -63,14 +74,31 @@ const BadgeId: FC<BadgeIdProps> = ({type, id}) => {
     };
   };
 
+  const parseIdValue = (id: string) => {
+    switch (type) {
+      case 'cuisine':
+        return cuisines ? cuisines.filter( el => el.id === id)[0].name : id;
+      
+      case 'diet':
+        return diets ? diets.filter( el => el.id === id)[0].name : id;
+
+      case 'difficulty':
+        return difficulties ? difficulties.filter( (el: { id: string; }) => el.id === id)[0].name : id;
+    
+      default:
+        return id;
+    }
+  };
+
   return (
     <Badge 
       autoContrast
       variant="filled"
-      leftSection={parseType()}
+      size="md"
+      leftSection={parseIconType()}
       color={parseColor()}
     >
-      prova {id}
+      {parseIdValue(id)}
     </Badge>
   )
 };
