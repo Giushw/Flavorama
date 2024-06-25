@@ -44,13 +44,13 @@ const Footer: FC = () => {
 
       <Group justify="flex-End" wrap="nowrap">
         <Link to="/guidelines" style={{ textDecoration: 'none' }}>
-          <Anchor c='smoke.1' lh={1} size="sm">Guidelines</Anchor>
+          <Anchor component='span' c='smoke.1' lh={1} size="sm">Guidelines</Anchor>
         </Link>
         <Link to="/tips" style={{ textDecoration: 'none' }}>
-          <Anchor c='smoke.1' lh={1} size="sm">Tips</Anchor>
+          <Anchor c='smoke.1' component='span' lh={1} size="sm">Tips</Anchor>
         </Link>
         <Link to="/contacts" style={{ textDecoration: 'none' }}>
-          <Anchor c='smoke.1' lh={1} size="sm">Contacts</Anchor>
+          <Anchor c='smoke.1' component='span' lh={1} size="sm">Contacts</Anchor>
         </Link>
       </Group>
   </Flex>
