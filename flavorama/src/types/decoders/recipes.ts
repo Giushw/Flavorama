@@ -1,4 +1,4 @@
-import {Iterable} from "../commons";
+import type {Iterable} from "../commons";
 
 export interface Recipe {
   id: string,
