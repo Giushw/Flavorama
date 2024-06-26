@@ -97,6 +97,14 @@ const Navigation: FC = () => {
 
   return (
     <Stack>
+      <Divider 
+        my="md"
+        labelPosition="center"
+        label={
+          <Text size='sm' c={'smoke.1'}> New Search</Text>
+        }
+      />
+
       <SearchGroup 
         model={value}
         changeHandler={setValue} 
@@ -108,7 +116,7 @@ const Navigation: FC = () => {
         my="md"
         labelPosition="center"
         label={
-          <Text size='sm' c={'smoke.1'}>Quick Searchs</Text>
+          <Text size='sm' c={'smoke.1'}>Quick Searches</Text>
         }
       />
 

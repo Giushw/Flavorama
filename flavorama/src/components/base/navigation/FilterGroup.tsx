@@ -1,9 +1,4 @@
-import {
-  FC,
-  useState,
-  type SetStateAction,
-  type Dispatch
-} from 'react';
+import {FC, useState} from 'react';
 import {
   Text,
   Accordion,
@@ -164,8 +159,6 @@ const FilterBtn: FC<FilterBtnProps> = ({
         justifyContent: 'center',
         borderRadius: 20,
         height: rem(90),
-        // width: rem(90),
-        // padding: 10,
         transition: 'background-color 0.3s ease',
         backgroundColor: hovered
           ? 'var(--mantine-color-hunyadi-3)'
