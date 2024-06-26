@@ -5,37 +5,103 @@ import {apiClient} from './client';
 /**
  * Get Recipes
  * Get a list of recipes with optional filtering and pagination.
- * @param {number} _page - optional - The page number to retrieve.
- * @param {number} _limit - optional - The number of recipes per page.
  * @param {string} q - optional - A full text search query.
  * @param {string} cuisineId - optional - Filter recipes by cuisine id.
  * @param {string} dietId - optional - Filter recipes by diet preference id (e.g., vegetarian, gluten-free).
  * @param {string} difficultyId - optional - Filter recipes by difficulty level.
+ * @param {number} _page - optional - The page number to retrieve.
+ * @param {number} _limit - optional - The number of recipes per page.
  * @param {Iterable<string>} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
  * @returns {Promise<Recipes>} A promise that resolves to a list of recipes.
  * @example 
  * const data = await getRecipes();
  */
 export const getRecipes = async (
-  _page?: string,
-  _limit?: string,
   q?: string,
   cuisineId?: string,
   dietId?: string,
   difficultyId?: string,
+  _page?: string,
+  _limit?: string,
   _expand?: Iterable<string>,
 ): Promise<Recipes> => {
   try {
     const response = await apiClient.get('/recipes', {
       params: {
+        q: q ?? null,
         _page: _page ?? null,
         _limit: _limit ?? null,
-        q: q ?? null,
         cuisineId: cuisineId ?? null,
         dietId: dietId ?? null,
         difficultyId: difficultyId ?? null,
         _expand: _expand ?? null,
       },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get Recipes by Cuisine
+ * Get a list of recipes filtered by cuisine.
+ * @param {string} cuisineId - optional - Filter recipes by cuisine id.
+ * @returns {Promise<Recipes>} A promise that resolves to a list of recipes.
+ * @example 
+ * const data = await getRecipesByCuisine('1');
+ */
+export const getRecipesByCuisine = async (
+  cuisineId: string,
+): Promise<Recipes> => {
+  try {
+    const response = await apiClient.get('/recipes', {
+      params: {cuisineId: cuisineId},
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get Recipes by Diet
+ * Get a list of recipes filtered by diet type.
+ * @param {string} dietId - optional - Filter recipes by diet id.
+ * @returns {Promise<Recipes>} A promise that resolves to a list of recipes.
+ * @example 
+ * const data = await getRecipesByCuisine('1');
+ */
+export const getRecipesByDiet = async (
+  dietId: string,
+): Promise<Recipes> => {
+  try {
+    const response = await apiClient.get('/recipes', {
+      params: {dietId: dietId},
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get Recipes by Difficutlty
+ * Get a list of recipes filtered by difficulty.
+ * @param {string} difficultyId - optional - Filter recipes by difficulty id.
+ * @returns {Promise<Recipes>} A promise that resolves to a list of recipes.
+ * @example 
+ * const data = await getRecipesByCuisine('1');
+ */
+export const getRecipesByDifficulty = async (
+  difficultyId: string,
+): Promise<Recipes> => {
+  try {
+    const response = await apiClient.get('/recipes', {
+      params: {difficultyId: difficultyId},
     });
     return response.data;
   } catch (error) {
@@ -73,7 +139,7 @@ export const postRecipes = async (
   image?: string,
 ): Promise<any> => {
   try {
-    const response = await axios.post('/recipes', {
+    const response = await apiClient.post('/recipes', {
       name,
       ingredients,
       cuisineId,

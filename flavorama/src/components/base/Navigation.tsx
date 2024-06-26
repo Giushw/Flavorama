@@ -1,49 +1,121 @@
-import {
-  FC,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from 'react';
+import {FC, useState} from 'react';
 import {
   Stack,
-  Group,
-  TextInput,
-  Button,
   Divider,
-  Text,
-  Accordion,
-  rem,
-  SimpleGrid
+  Text
 } from '@mantine/core';
+import SearchGroup from './navigation/SearchGroup';
+import FilterGroup from './navigation/FilterGroup';
+import useStoreRecipe from '@/store/recipe';
 import {
-  IconSearch,
-  IconArrowBackUp,
-  IconFlag,
-  IconApple,
-  IconHourglassEmpty
-} from '@tabler/icons-react';
+  getRecipes,
+  getRecipesByCuisine,
+  getRecipesByDiet,
+  getRecipesByDifficulty
+} from '@/server/Recipes';
 
-interface NavigationProps {
-  mHandle?: () => void;
-  dHandle?: () => void;
-};
-
-const Navigation: FC<NavigationProps> = ({mHandle, dHandle}) => {  
+const Navigation: FC = () => {  
+  const recipeStore = useStoreRecipe();
   const [value, setValue] = useState('');
+
+  const resetCall = () => {
+    getRecipes()
+      .then((data) => {
+        recipeStore.updateLoading(true);
+        recipeStore.updateRecipe(data);
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => recipeStore.updateLoading(false));
+  };
+
+  const onClean = () => {
+    resetCall();
+  }
+;
+  const onCancel = () => {
+    if (value !== '') {
+      setValue('');
+
+      resetCall();
+    };
+  };
+
+  const onSearch = () => {
+    if (value !== '') {
+      getRecipes(value)
+      .then((data) => {
+        recipeStore.updateLoading(true);
+        recipeStore.updateRecipe(data);
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => recipeStore.updateLoading(false));
+    }
+  };
+
+  const onFilter = (type: 'cui' | 'die' | 'dif', id: string) => {
+    if (type === 'cui') {
+
+      getRecipesByCuisine(id)
+      .then((data) => {
+        recipeStore.updateLoading(true);
+        recipeStore.updateRecipe(data);
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => recipeStore.updateLoading(false));
+
+    } else if (type === 'die') {
+
+      getRecipesByDiet(id)
+      .then((data) => {
+        recipeStore.updateLoading(true);
+        recipeStore.updateRecipe(data);
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => recipeStore.updateLoading(false));
+
+    } else {
+
+      getRecipesByDifficulty(id)
+      .then((data) => {
+        recipeStore.updateLoading(true);
+        recipeStore.updateRecipe(data);
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => recipeStore.updateLoading(false));
+    };
+  };
 
   return (
     <Stack>
-      <SearchGroup cHandler={setValue}/>
+      <SearchGroup 
+        model={value}
+        changeHandler={setValue} 
+        cancelHandler={onCancel} 
+        searchHandler={onSearch}
+      />
 
       <Divider 
         my="md"
         labelPosition="center"
         label={
-          <Text size='sm' c={'smoke.1'}>Filters</Text>
+          <Text size='sm' c={'smoke.1'}>Quick Searchs</Text>
         }
       />
 
-      <FilterGroup />
+      <FilterGroup 
+        filterHandler={onFilter}
+        cleanHandler={onClean}
+      />
 
       <Divider 
         my="md"
@@ -57,99 +129,3 @@ const Navigation: FC<NavigationProps> = ({mHandle, dHandle}) => {
 };
 
 export default Navigation;
-
-interface SearchGroupProps {
-  cHandler: Dispatch<SetStateAction<string>>;
-};
-
-const SearchGroup: FC<SearchGroupProps> = ({cHandler}) => {
-  return (
-    <Stack bg={'jet.1'} style={{borderRadius: 25}} px={15} py={25}>
-      <Text size='lg' c={'smoke.1'} >Search a recipe</Text>
-
-      <TextInput
-        size="md"
-        radius="lg"
-        mb="sm"
-        placeholder="If you stare into the abyss, the abyss stares back at you."
-        onChange={(event) => cHandler(event.currentTarget.value)}
-      />
-
-      <Group justify="center">
-        <Button leftSection={<IconArrowBackUp size={16} />} bg={'smoke.1'} autoContrast radius={'md'}>
-          Cancel
-        </Button>
-
-        <Button rightSection={<IconSearch size={16} />} autoContrast radius={'md'}>
-          Search
-        </Button>
-      </Group>
-    </Stack>
-  );
-};
-
-const FilterGroup: FC = () => {
-  return (
-    <Accordion variant="contained" radius={25}>
-      <Accordion.Item value="cuisine" bg={'jet.1'}>
-        <Accordion.Control
-          icon={
-            <IconFlag
-              style={{ color: 'var(--mantine-color-hunyadi-3', width: rem(20), height: rem(20) }}
-            />
-          }
-        >
-          Cuisine Type
-        </Accordion.Control>
-        <Accordion.Panel>
-        <SimpleGrid cols={2} mt="md">
-          <Button variant='default'>
-            <IconHourglassEmpty
-                size="2rem"
-                style={{ color: 'var(--mantine-color-hunyadi-3)' }}
-              />
-            <Text size="xs" mt={7}>
-              item.title.1
-            </Text>
-          </Button>
-          <Button variant='default'>
-            <IconHourglassEmpty
-                size="2rem"
-                style={{ color: 'var(--mantine-color-hunyadi-3)' }}
-              />
-            <Text size="xs" mt={7}>
-              item.title.2
-            </Text>
-          </Button>
-        </SimpleGrid>
-        </Accordion.Panel>
-      </Accordion.Item>
-
-      <Accordion.Item value="diet" bg={'jet.1'}>
-        <Accordion.Control
-          icon={
-            <IconApple
-              style={{ color: 'var(--mantine-color-hunyadi-3', width: rem(20), height: rem(20) }}
-            />
-          }
-        >
-          Diet Preferences
-        </Accordion.Control>
-        <Accordion.Panel>Content</Accordion.Panel>
-      </Accordion.Item>
-
-      <Accordion.Item value="difficulty" bg={'jet.1'}>
-        <Accordion.Control
-          icon={
-            <IconHourglassEmpty
-              style={{ color: 'var(--mantine-color-hunyadi-3)', width: rem(20), height: rem(20) }}
-            />
-          }
-        >
-          Difficulty Settings
-        </Accordion.Control>
-        <Accordion.Panel>Content</Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
-  );
-};

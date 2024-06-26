@@ -6,8 +6,10 @@ import {
   Group,
   BackgroundImage,
   Blockquote,
-  Stack
+  Stack,
+  Box
 } from '@mantine/core';
+import {useId} from '@mantine/hooks';
 import {IconInfoCircle} from '@tabler/icons-react'
 import type {Recipe} from '@/types/decoders/recipes';
 import BadgeId, {type DifficultiesType} from '../common/BadgeId';
@@ -71,10 +73,10 @@ const CardEntity: FC<CardEntityProps> = ({data}) => {
           </Group>
 
           {ingredients.map( (item, i) => (
-            <>
+            <Box component='span' key={useId(`${i}`)}>
               {i!== 0 ? <Text component='span'> - </Text> : null}
-            <Text component='span' tt="capitalize" key={i}>{item} </Text>
-            </>
+              <Text component='span' tt="capitalize" >{item} </Text>
+            </Box>
           ))}
         </Blockquote>
       </Card.Section>
