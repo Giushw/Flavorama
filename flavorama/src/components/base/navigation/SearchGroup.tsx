@@ -34,7 +34,7 @@ const SearchGroup: FC<SearchGroupProps> = ({model, changeHandler, cancelHandler,
         <Button 
           radius={'md'}
           autoContrast 
-          bg={'smoke.1'}
+          color={'smoke.1'}
           leftSection={<IconTrash size={16} />}
           onClick={cancelHandler}
         >
@@ -44,7 +44,7 @@ const SearchGroup: FC<SearchGroupProps> = ({model, changeHandler, cancelHandler,
         <Button 
           radius={'md'}
           autoContrast
-          rightSection={<IconSearch size={16} />}
+          leftSection={<IconSearch size={16} />}
           onClick={searchHandler}
         >
           Search

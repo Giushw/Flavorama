@@ -33,9 +33,9 @@ const FilterGroup: FC<FilterGroupProps> = ({
   const difficultyStore = useStoreDifficulty();
 
   return (
-    <Stack>
+    <Stack bg={'jet.1'} px={15} py={20} style={{borderRadius: 25}}>
       <Accordion variant="contained" radius={25}>
-        <Accordion.Item value="cuisine" bg={'jet.1'}>
+        <Accordion.Item value="cuisine" bg={'night.1'}>
           <Accordion.Control
             icon={
               <IconFlag
@@ -63,7 +63,7 @@ const FilterGroup: FC<FilterGroupProps> = ({
           </Accordion.Panel>
         </Accordion.Item>
 
-        <Accordion.Item value="diet" bg={'jet.1'}>
+        <Accordion.Item value="diet" bg={'night.1'}>
           <Accordion.Control
             icon={
               <IconApple
@@ -82,7 +82,6 @@ const FilterGroup: FC<FilterGroupProps> = ({
                     type='diet'
                     label={c.name}
                     id={c.id}
-                    // clickHandler={() => dietSet(c.id)}
                     clickHandler={() => filterHandler('die', c.id)}
                   />
                 )}
@@ -91,7 +90,7 @@ const FilterGroup: FC<FilterGroupProps> = ({
           </Accordion.Panel>
         </Accordion.Item>
 
-        <Accordion.Item value="difficulty" bg={'jet.1'}>
+        <Accordion.Item value="difficulty" bg={'night.1'}>
           <Accordion.Control
             icon={
               <IconHourglassEmpty
@@ -109,7 +108,6 @@ const FilterGroup: FC<FilterGroupProps> = ({
                     key={`dif-${c.id}`}
                     type='difficulty'
                     label={c.name} id={c.id} 
-                    // clickHandler={() => difficultySet(c.id)}
                     clickHandler={() => filterHandler('dif', c.id)}
                   />
                 )}
@@ -123,14 +121,13 @@ const FilterGroup: FC<FilterGroupProps> = ({
         fullWidth
         radius={'md'}
         autoContrast 
-        bg={'smoke.1'}
+        color={'smoke.1'}
         leftSection={<IconTrash size={16} />}
         onClick={cleanHandler}
       >
         Clean
       </Button>
     </Stack>
-    
   );
 };
 

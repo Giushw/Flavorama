@@ -65,7 +65,6 @@ const RightSide: FC = () => {
 
           <Link to='/search'>
             <Button 
-              component='button'
               variant='filled'
               size='xl'
               radius={'md'}
