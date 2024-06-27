@@ -65,7 +65,6 @@ const Search: FC = () => {
         console.error('error: ', error);
       })
       .finally(() => difficultyStore.updateLoading(false));
-
   }, []);
 
   return (

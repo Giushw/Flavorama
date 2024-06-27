@@ -12,8 +12,8 @@ import {
   getRecipesByDifficulty
 } from '@/server/Recipes';
 import SearchGroup from './navigation/SearchGroup';
-import FilterGroup from './navigation/FilterGroup';
-import AddGroup from './navigation/AddGroup';
+import FilterGroup from './navigation/filters/FilterGroup';
+import AddGroup from './navigation/add/AddGroup';
 
 const Navigation: FC = () => {  
   const recipeStore = useStoreRecipe();
