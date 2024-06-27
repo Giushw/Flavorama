@@ -4,8 +4,6 @@ import {
   Divider,
   Text
 } from '@mantine/core';
-import SearchGroup from './navigation/SearchGroup';
-import FilterGroup from './navigation/FilterGroup';
 import useStoreRecipe from '@/store/recipe';
 import {
   getRecipes,
@@ -13,6 +11,9 @@ import {
   getRecipesByDiet,
   getRecipesByDifficulty
 } from '@/server/Recipes';
+import SearchGroup from './navigation/SearchGroup';
+import FilterGroup from './navigation/FilterGroup';
+import AddGroup from './navigation/AddGroup';
 
 const Navigation: FC = () => {  
   const recipeStore = useStoreRecipe();
@@ -129,9 +130,11 @@ const Navigation: FC = () => {
         my="md"
         labelPosition="center"
         label={
-          <Text size='sm' c={'smoke.1'}>Add One</Text>
+          <Text size='sm' c={'smoke.1'}>Add a Recipe</Text>
         }
       />
+
+      <AddGroup />
     </Stack>
   )
 };
