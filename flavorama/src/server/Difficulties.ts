@@ -17,5 +17,4 @@ export const getDifficulties = async (): Promise<TypesList> => {
     console.error('Error fetching data:', error);
     throw error;
   }
-  
 };

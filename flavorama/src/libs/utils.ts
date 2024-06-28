@@ -1,14 +1,4 @@
 /**
- * getRandomInt
- * Return a random integer form 0 to max;
- * @param {number} max - The Max integer.
- * @returns {number} A number.
- * @example 
- * const data = getRandomInt(2);
- */
-export const getRandomInt = (max: number): number => Math.floor(Math.random() * max);
-
-/**
  * getRandomIntBetween
  * Return a random integer form min to max;
  * The maximum is exclusive and the minimum is inclusive
