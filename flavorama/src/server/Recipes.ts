@@ -133,6 +133,7 @@ export const getRecipesByDifficulty = async (
 export const postRecipes = async (
   name: string,
   ingredients: Iterable<string>,
+  instructions: string,
   cuisineId: string,
   dietId: string,
   difficultyId: string,
@@ -142,6 +143,7 @@ export const postRecipes = async (
     const response = await apiClient.post('/recipes', {
       name,
       ingredients,
+      instructions,
       cuisineId,
       dietId,
       difficultyId,

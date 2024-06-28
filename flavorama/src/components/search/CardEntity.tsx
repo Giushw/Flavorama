@@ -12,8 +12,8 @@ import {
 import {useId} from '@mantine/hooks';
 import {IconInfoCircle} from '@tabler/icons-react'
 import type {Recipe} from '@/types/decoders/recipes';
-import BadgeId, {type DifficultiesType} from '../common/BadgeId';
 import {apiPath} from '@/server/client';
+import BadgeId, {type DifficultiesType} from '../common/BadgeId';
 
 interface CardEntityProps {
   data: Recipe

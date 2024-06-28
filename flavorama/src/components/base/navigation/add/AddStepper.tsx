@@ -2,18 +2,24 @@ import {FC, useState} from 'react';
 import {
   Button,
   Stepper,
-  Group
+  Group,
+  Dialog,
+  Alert
 } from '@mantine/core';
 import type {FileWithPath} from '@mantine/dropzone';
+import {useDisclosure} from '@mantine/hooks';
 import {
   IconArrowBack,
-  IconArrowForward
+  IconArrowForward,
+  IconInfoCircle
 } from '@tabler/icons-react';
 import {postRecipes} from '@/server/Recipes';
 import useStoreRecipe from '@/store/recipe';
 import FirstStep from './FirstStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
+import FinalStep from './FinalStep';
+import { AxiosError } from 'axios';
 
 const AddStepper: FC = () => {
   const [active, setActive] = useState(0);
@@ -31,54 +37,50 @@ const AddStepper: FC = () => {
   const [files, setFiles] = useState<FileWithPath[]>([]);
   const [base64String, setBase64String] = useState<string>('');
 
-  // const handleSubmit = () => {
-  //   // Use base64String for your API request
-  //   const apiPayload = {
-  //     image: base64String,
-  //     // other fields
-  //   };
+  const [opened, { open, close }] = useDisclosure(false);
 
-  //   // Make your API call here
-  //   fetch('/your-api-endpoint', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(apiPayload)
-  //   }).then(response => {
-  //     // Handle response
-  //   }).catch(error => {
-  //     // Handle error
-  //   });
-  // };
+  interface Alert {
+    status: number,
+    code: string,
+    message: string
+  }
+
+  const [alertMsg, setAlertMsg] = useState<Alert | null>(null);
 
   const onSearch = () => {
-    const paramBuilder = {
+    const paramData = {
       name: name,
       ingredients: ingredients,
-      cuisineId: cuisines,
-      dietId: diets,
-      difficultyId: difficulties,
+      cuisines: cuisines,
+      diets: diets,
+      difficulties: difficulties,
       image: base64String
-    };
-    // if (value !== '') {
+    }
+    console.log('paramData: ', paramData);
       postRecipes(
-        paramBuilder.name,
-        paramBuilder.ingredients,
-        paramBuilder.cuisineId,
-        paramBuilder.dietId,
-        paramBuilder.difficultyId,
-        paramBuilder.image
+        name,
+        ingredients,
+        cuisines,
+        diets,
+        difficulties,
+        base64String
       )
-      .then((data) => {
-        recipeStore.updateLoading(true);
-        recipeStore.updateRecipe(data);
+      .then(() => {
+        setAlertMsg({
+          message: 'Request successed with status code 200',
+          code: 'SUCCESS',
+          status: 200
+        })
       })
-      .catch((error: Error) => {
+      .catch((error: AxiosError) => {
         console.error('error: ', error);
+        setAlertMsg({
+          code: error.code ?? 'ERROR',
+          message: error.message,
+          status: error.status ? error.status : 500
+        })
       })
-      .finally(() => recipeStore.updateLoading(false));
-    // }
+      .finally(() => open());
   };
 
   return (
@@ -129,7 +131,15 @@ const AddStepper: FC = () => {
         </Stepper.Step>
 
         <Stepper.Completed>
-          Completed, click back button to get to previous step
+          <FinalStep 
+            name={name}
+            ingredients={ingredients}
+            instructions={instructions}
+            cusId={cuisines}
+            dieId={diets}
+            difId={difficulties}
+            img={base64String ?? null}
+          />
         </Stepper.Completed>
       </Stepper>
 
@@ -167,6 +177,22 @@ const AddStepper: FC = () => {
           </Button>
         }
       </Group>
+
+      {alertMsg &&
+        <Dialog opened={opened} withCloseButton onClose={close} size="lg" radius="lg" bg={'night.1'} p={30}>
+          <Alert 
+            autoContrast
+            variant="filled" 
+            icon={<IconInfoCircle />}
+            color={alertMsg.status >= 400 ? 'red' : 'teal'} 
+            title={alertMsg.code} 
+            radius={'lg'}
+          >
+            {alertMsg.message}
+          </Alert>
+        </Dialog>
+      }
+      
     </>
   );
 };
