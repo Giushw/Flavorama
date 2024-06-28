@@ -1,9 +1,7 @@
-import type {Iterable} from "../commons";
-
 export interface Recipe {
   id: string,
   name: string,
-  ingredients: Iterable<string>;
+  ingredients: string[];
   instructions: string,
   cuisineId: string,
   dietId: string,
@@ -11,7 +9,7 @@ export interface Recipe {
   image: string
 };
 
-export type Recipes = Iterable<Recipe>;
+export type Recipes = Recipe[];
 
 export interface Comment {
   id: string,
@@ -21,7 +19,7 @@ export interface Comment {
   date: string // datestring
 };
 
-export type Comments = Iterable<Comment> ;
+export type Comments = Comment[] ;
 
 /* Recipes
   [

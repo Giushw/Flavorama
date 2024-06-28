@@ -1,5 +1,3 @@
-import type {Iterable} from "../commons";
-
 // Single entity for cuisines | difficulties | diets
 interface Type {
   id: string,
@@ -7,8 +5,7 @@ interface Type {
 };
 
 // List of entities for cuisines | difficulties | diets
-export type TypesList = Iterable<Type>;
-
+export type TypesList = Type[];
 
 /* Cuisines
 [

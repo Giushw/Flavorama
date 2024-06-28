@@ -1,4 +1,3 @@
-import type {Iterable} from '@/types/commons';
 import type {Recipes, Recipe, Comments} from '@/types/decoders/recipes';
 import {apiClient} from './client';
 
@@ -11,7 +10,7 @@ import {apiClient} from './client';
  * @param {string} difficultyId - optional - Filter recipes by difficulty level.
  * @param {number} _page - optional - The page number to retrieve.
  * @param {number} _limit - optional - The number of recipes per page.
- * @param {Iterable<string>} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
+ * @param {string[]} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
  * @returns {Promise<Recipes>} A promise that resolves to a list of recipes.
  * @example 
  * const data = await getRecipes();
@@ -23,7 +22,7 @@ export const getRecipes = async (
   difficultyId?: string,
   _page?: string,
   _limit?: string,
-  _expand?: Iterable<string>,
+  _expand?: string[]
 ): Promise<Recipes> => {
   try {
     const response = await apiClient.get('/recipes', {
@@ -114,7 +113,7 @@ export const getRecipesByDifficulty = async (
  * Post Recipe
  * Post a new recipe.
  * @param {string} name - The name of the recipe.
- * @param {Iterable<string>} ingredients - The list of ingredients.
+ * @param {string[]} ingredients - The list of ingredients.
  * @param {string} cuisineId - The type of cuisine.
  * @param {string} dietId - The type of diet preference (e.g., vegetarian, gluten-free).
  * @param {string} difficultyId - The difficulty level of the recipe.
@@ -132,7 +131,7 @@ export const getRecipesByDifficulty = async (
  */
 export const postRecipes = async (
   name: string,
-  ingredients: Iterable<string>,
+  ingredients: string[],
   instructions: string,
   cuisineId: string,
   dietId: string,
@@ -160,14 +159,14 @@ export const postRecipes = async (
  * Get Recipe
  * Get detailed information about a specific recipe.
  * @param {number} id - The unique identifier of the recipe.
- * @param {Iterable<string>} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
+ * @param {string[]} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
  * @returns {Promise<Recipe>} A promise that resolves to a list of recipes.
  * @example 
  * const data = await getRecipes();
  */
 export const getRecipe = async (
   id: string,
-  _expand?: Iterable<string>,
+  _expand?: string[],
 ): Promise<Recipe> => {
   try {
     const response = await apiClient.get(`/recipes/${id}`, {
@@ -186,14 +185,14 @@ export const getRecipe = async (
  * Get Recipe Comments
  * Get all comments and ratings for a specific recipe.
  * @param {number} id - The unique identifier of the recipe.
- * @param {Iterable<string>} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
+ * @param {string[]} _expand - optional - Embed relation in the data, this add difficulty, cuisine, diet object directy in the response Available values : difficulty, cuisine, diet.
  * @returns {Promise<Comments>} A promise that resolves to a list of recipes.
  * @example 
  * const data = await getRecipeComments('1');
  */
 export const getRecipeComments = async (
   id: string,
-  _expand?: Iterable<string>,
+  _expand?: string[],
 ): Promise<Comments> => {
   try {
     const response = await apiClient.get(`/recipes/${id}/comments`, {
@@ -226,9 +225,9 @@ export const getRecipeComments = async (
 export const postRecipeComment = async (
   id: string,
   comment: string,
-  rating: Iterable<string>,
+  rating: string[],
   date: string,
-  _expand?: Iterable<string>,
+  _expand?: string[],
 ): Promise<unknown> => {
   try {
     const response = await apiClient.post(`/recipes/${id}/comments`, {
