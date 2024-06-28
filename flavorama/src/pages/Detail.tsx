@@ -1,41 +1,64 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-// import {getRecipes} from '@/server/Recipes';
-import useStoreRecipe from '@/store/recipe';
-import Default from '@/layouts/Default';
 import {Title} from '@mantine/core';
+import {getRecipe, getRecipeComments} from '@/server/Recipes';
+import type {Recipe} from '@/types/decoders/recipes';
+import type {Comments} from '@/types/decoders/recipes';
+import Default from '@/layouts/Default';
+import RecipeInfo from '@/components/detail/Recipe';
 
 const Detail: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const recipeStore = useStoreRecipe();  
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [loadingRecipe, setLoadingRecipe] = useState(false);
+  const [comments, setComments] = useState< Comments | null>(null);
+  const [loadingComments, setLoadingComments] = useState(false);
 
   useEffect(() => {
-    // getRecipes()
-    //   .then((data) => {
-    //     recipeStore.updateLoading(true);
-    //     recipeStore.updateRecipe(data);
-    //   })
-    //   .catch((error: Error) => {
-    //     console.error('error: ', error);
-    //   })
-    //   .finally(() => recipeStore.updateLoading(false));
+    if (id) {
+      getRecipe(id)
+      .then((data) => {
+        setRecipe(data)
+        setLoadingRecipe(true)
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => setLoadingRecipe(false));
 
-    // getRecipeComments('1')
-    //   .then((data) => {
-    //     setComments(data);
-    //   })
-    //   .catch((error: Error) => {
-    //     console.error('error: ', error);
-    //   });
+    getRecipeComments(id)
+      .then((data) => {
+        setComments(data);
+        setLoadingComments(true)
+      })
+      .catch((error: Error) => {
+        console.error('error: ', error);
+      })
+      .finally(() => setLoadingComments(false));
+    }
   }, []);
 
+  useEffect(() => {
+    console.log('recipe: ', recipe)
+  }, [recipe]);
+
+  useEffect(() => {
+    console.log('comments: ', comments)
+  }, [comments]);
+
   return (
-    <Default mainSlot={
-      // <CardList data={recipeStore.recipes} loading={recipeStore.loading} />
-      <Title>{id}</Title>
-    } />
+    <Default 
+      navDisable
+      mainSlot={
+        <RecipeInfo 
+          data={recipe} 
+          loading={loadingRecipe} 
+          cData={comments}
+          cLoading={loadingComments}
+        />
+      } 
+    />
   )
 };
 
 export default Detail;
-

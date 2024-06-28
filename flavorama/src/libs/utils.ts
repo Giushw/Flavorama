@@ -23,3 +23,29 @@ export const getRandomIntBetween = (min: number, max: number): number => {
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); 
 };
+
+/**
+ * dateParsed
+ * Return a parsed now date;
+ * @returns {string} A string date.
+ * @example 
+ * const data = dateParsed();
+ */
+export const dateParsed = (): string => {
+  const date = new Date;
+
+  // Function to pad single digit numbers with a leading zero
+  const pad = (number: number) => (number < 10 ? '0' : '') + number;
+
+  // Extract the individual components of the date
+  const year = date.getUTCFullYear();
+  const month = pad(date.getUTCMonth() + 1); // Months are zero-indexed
+  const day = pad(date.getUTCDate());
+  const hours = pad(date.getUTCHours());
+  const minutes = pad(date.getUTCMinutes());
+  const seconds = pad(date.getUTCSeconds());
+  const milliseconds = pad(date.getUTCMilliseconds());
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
+};
+

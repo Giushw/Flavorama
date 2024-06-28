@@ -19,7 +19,7 @@ import FirstStep from './FirstStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
 import FinalStep from './FinalStep';
-import { AxiosError } from 'axios';
+import {AxiosError} from 'axios';
 
 const AddStepper: FC = () => {
   const [active, setActive] = useState(0);
@@ -43,44 +43,35 @@ const AddStepper: FC = () => {
     status: number,
     code: string,
     message: string
-  }
+  };
 
   const [alertMsg, setAlertMsg] = useState<Alert | null>(null);
 
   const onSearch = () => {
-    const paramData = {
-      name: name,
-      ingredients: ingredients,
-      cuisines: cuisines,
-      diets: diets,
-      difficulties: difficulties,
-      image: base64String
-    }
-    console.log('paramData: ', paramData);
-      postRecipes(
-        name,
-        ingredients,
-        cuisines,
-        diets,
-        difficulties,
-        base64String
-      )
-      .then(() => {
-        setAlertMsg({
-          message: 'Request successed with status code 200',
-          code: 'SUCCESS',
-          status: 200
-        })
+    postRecipes(
+      name,
+      ingredients,
+      cuisines,
+      diets,
+      difficulties,
+      base64String
+    )
+    .then(() => {
+      setAlertMsg({
+        message: 'Request successed with status code 200',
+        code: 'SUCCESS',
+        status: 200
       })
-      .catch((error: AxiosError) => {
-        console.error('error: ', error);
-        setAlertMsg({
-          code: error.code ?? 'ERROR',
-          message: error.message,
-          status: error.status ? error.status : 500
-        })
+    })
+    .catch((error: AxiosError) => {
+      console.error('error: ', error);
+      setAlertMsg({
+        code: error.code ?? 'ERROR',
+        message: error.message,
+        status: error.status ? error.status : 500
       })
-      .finally(() => open());
+    })
+    .finally(() => open());
   };
 
   return (

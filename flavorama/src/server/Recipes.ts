@@ -225,7 +225,7 @@ export const getRecipeComments = async (
 export const postRecipeComment = async (
   id: string,
   comment: string,
-  rating: string[],
+  rating: number,
   date: string,
   _expand?: string[],
 ): Promise<unknown> => {

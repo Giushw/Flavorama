@@ -6,10 +6,11 @@ import Navigation from '@/components/base/Navigation';
 import Footer from '@/components/base/Footer';
 
 interface DefaultProps {
-  mainSlot?: ReactNode
+  mainSlot?: ReactNode,
+  navDisable?: boolean
 };
 
-const Default: FC<DefaultProps> = ({mainSlot}) => {
+const Default: FC<DefaultProps> = ({mainSlot, navDisable = false}) => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
@@ -28,12 +29,20 @@ const Default: FC<DefaultProps> = ({mainSlot}) => {
       padding="md"
     >
       <AppShell.Header bg={'night.1'}>
-        <Header mState={mobileOpened} dState={desktopOpened} mHandle={toggleMobile} dHandle={toggleDesktop} />
+        <Header 
+          mState={mobileOpened}
+          dState={desktopOpened}
+          mHandle={toggleMobile}
+          dHandle={toggleDesktop}
+          burgherDisable={navDisable}
+        />
       </AppShell.Header>
 
-      <AppShell.Navbar p="md" bg={'night.1'} >
-        <Navigation />
-      </AppShell.Navbar>
+      {!navDisable &&
+        <AppShell.Navbar p="md" bg={'night.1'} >
+          <Navigation />
+        </AppShell.Navbar>
+      }
 
       <AppShell.Main bg={'night.1'}>
         <Box p={20} w='100%' h='100%'>

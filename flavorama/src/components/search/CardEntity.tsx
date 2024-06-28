@@ -57,7 +57,6 @@ const CardEntity: FC<CardEntityProps> = ({data}) => {
             borderTopRightRadius: 0,
             borderBottomRightRadius: 20,
             borderBottomLeftRadius: 20
-            // borderBottomLeftRadius: 0
           }}
         >
           <Group gap={6} justify='center' mb={15}>
