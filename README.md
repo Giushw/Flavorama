@@ -132,4 +132,4 @@ You can find in the internal `flavorama` **README.md** file more info on all the
 
 ### Extra
 Here a little gift:
-![The Mythy fusion of a capibara and one of the most famous meme](Chadpibara.jpg)
+![The Mythy fusion of a capibara and one of the most famous meme](./flavorama/Chadpibara.jpg)
