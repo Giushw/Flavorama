@@ -124,7 +124,7 @@ const GridElements: FC<GridElementsProps> = ({list}) => {
             span={{ base: 12, md: 6, lg: 4 }}
             key={item.id}
           >
-            <Link to='/recipe/:id' style={{textDecoration: 'none'}}>
+            <Link to={`/recipe/${item.id}`} style={{textDecoration: 'none'}}>
               <CardEntity data={item}/>
             </Link>
           </Grid.Col>

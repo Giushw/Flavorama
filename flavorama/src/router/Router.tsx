@@ -3,7 +3,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Home from '@/pages/Home';
 import Error from "@/pages/Error";
 import Search from '@/pages/Search';
-import Detail from '@/pages/Search';
+import Detail from '@/pages/Detail';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Search />,
   },
   {
-    path: '/search/:id',
+    path: '/recipe/:id',
     element: <Detail />,
   },
 ]);
