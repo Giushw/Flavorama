@@ -1,12 +1,12 @@
 import {FC, useEffect} from 'react';
-import useStoreRecipe from '@/store/recipe';
-import useStoreCuisine from '@/store/cuisine';
-import useStoreDiet from '@/store/diet';
-import useStoreDifficulty from '@/store/difficulty';
 import {getRecipes} from '@/server/Recipes';
 import {getCuisines} from '@/server/Cuisines';
 import {getDifficulties} from '@/server/Difficulties';
 import {getDiets} from '@/server/Diets';
+import useStoreRecipe from '@/store/recipe';
+import useStoreCuisine from '@/store/cuisine';
+import useStoreDiet from '@/store/diet';
+import useStoreDifficulty from '@/store/difficulty'
 import Default from '@/layouts/Default';
 import CardList from '@/components/search/CardList';
 
@@ -67,4 +67,3 @@ const Search: FC = () => {
 };
 
 export default Search;
-

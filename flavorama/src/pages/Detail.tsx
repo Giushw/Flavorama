@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {Title} from '@mantine/core';
 import {getRecipe, getRecipeComments} from '@/server/Recipes';
 import type {Recipe} from '@/types/decoders/recipes';
 import type {Comments} from '@/types/decoders/recipes';
@@ -37,14 +36,6 @@ const Detail: FC = () => {
       .finally(() => setLoadingComments(false));
     }
   }, []);
-
-  useEffect(() => {
-    console.log('recipe: ', recipe)
-  }, [recipe]);
-
-  useEffect(() => {
-    console.log('comments: ', comments)
-  }, [comments]);
 
   return (
     <Default 

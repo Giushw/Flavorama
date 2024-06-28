@@ -9,47 +9,45 @@ interface SplashProps {
   rSlot: ReactNode
 };
 
-const Splash: FC<SplashProps> = ({lSize, rSize, lSlot, rSlot}) => {
-  return (
-    <Grid 
-      justify='center'
-      align='center'
-      p={50}
-      w={'100vw'}
-      h={'100vh'}
-      bg={'night.1'}
-      styles={{
-        inner: {
-          width: '100%',
-          height: '100%'
-        }
-      }}
+const Splash: FC<SplashProps> = ({lSize, rSize, lSlot, rSlot}) => (
+  <Grid 
+    justify='center'
+    align='center'
+    p={50}
+    w={'100vw'}
+    h={'100vh'}
+    bg={'night.1'}
+    styles={{
+      inner: {
+        width: '100%',
+        height: '100%'
+      }
+    }}
+  >
+    <Grid.Col 
+      w={'100%'}
+      h={'100%'}
+      span={
+        typeof lSize === 'number' ?
+          {lSize} :
+          {...lSize}
+      }
     >
-      <Grid.Col 
-        w={'100%'}
-        h={'100%'}
-        span={
-          typeof lSize === 'number' ?
-            {lSize} :
-            {...lSize}
-        }
-      >
-        {lSlot}     
-      </Grid.Col>
+      {lSlot}     
+    </Grid.Col>
 
-      <Grid.Col 
-        w={'100%'}
-        h={'100%'}
-        span={
-          typeof rSize === 'number' ?
-            {rSize} :
-            {...rSize}
-        }
-      >
-        {rSlot}
-      </Grid.Col>
-    </Grid>
-  )
-};
+    <Grid.Col 
+      w={'100%'}
+      h={'100%'}
+      span={
+        typeof rSize === 'number' ?
+          {rSize} :
+          {...rSize}
+      }
+    >
+      {rSlot}
+    </Grid.Col>
+  </Grid>
+);
 
 export default Splash;
