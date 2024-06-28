@@ -138,6 +138,7 @@ export const postRecipes = async (
   difficultyId: string,
   image?: string,
 ): Promise<any> => {
+  // FIXME: Actually this Api isn't repling well and always give me 500, need to be debugged
   try {
     const response = await apiClient.post('/recipes', {
       name,

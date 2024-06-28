@@ -99,5 +99,37 @@ comments. Enable users to add comments and rate the recipe, displaying the avera
 comments.
 
 ## How to run
+This Project was created with this requirement:
 
-...
+1. [Node](https://nodejs.org/en) with **v10.8.1**;
+2. [Npm](https://www.npmjs.com/) with **v21.7.3**;
+3. [Mantine](https://mantine.dev/) with **v"7.11.0** (necessary for the [mantine/dropzone] package to work);
+
+### Steps
+After Downloading/cloning the repo all you need to do are 2 simple but fundamental steps:
+
+- start the server;
+- start the application:
+
+### Server
+The server was almost untouched so before running the application open a terminal and do the following:
+
+- Open server folder `cd .../toAppPath/Flavorama/server`;
+- Install `npm install`;
+- Then `npm start`;
+
+### Application
+Now that the server is on with another terminal do the same and go into the app folder this time:
+
+- Open app folder `cd .../toAppPath/Flavorama/flavorama`;
+- Install `npm install`;
+- Then `npm run dev`;
+- Check the `package.json` for the correct **Dependencies** app.
+- Check the **localhost** for the rendered app.
+
+**Additional Notes:**
+You can find in the internal `flavorama` **README.md** file more info on all the other possible commands.
+
+### Extra
+Here a little gift:
+![The Mythy fusion of a capibara and one of the most famous meme](Chadpibara.jpg)
