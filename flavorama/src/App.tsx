@@ -10,7 +10,7 @@ const App: FC = () => {
     <MantineProvider defaultColorScheme={'dark'} theme={theme}>
       <Router />
     </MantineProvider>
-  )
+  );
 };
 
 export default App;

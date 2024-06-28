@@ -5,7 +5,7 @@ interface StoreRecipe {
   recipes: Recipes | null,
   loading: boolean,
   updateRecipe: (data: Recipes) => void,
-  updateLoading: (data: boolean) => void,
+  updateLoading: (data: boolean) => void
 }
 
 const useStoreRecipe = create<StoreRecipe>()((set) => ({

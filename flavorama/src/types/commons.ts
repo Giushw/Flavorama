@@ -4,5 +4,5 @@ export interface WiewportObj {
   sm?: number,
   md?: number,
   lg?: number,
-  xl?: number,
+  xl?: number
 }

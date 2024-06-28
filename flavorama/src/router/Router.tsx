@@ -18,13 +18,11 @@ const router = createBrowserRouter([
   {
     path: '/recipe/:id',
     element: <Detail />,
-  },
+  }
 ]);
 
-const Router: FC = () => {
-  return (
-    <RouterProvider router={router} />
-  )
-};
+const Router: FC = () => (
+  <RouterProvider router={router} />
+);
 
 export default Router;
