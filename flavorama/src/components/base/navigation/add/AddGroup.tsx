@@ -11,15 +11,8 @@ import {
 } from '@tabler/icons-react';
 import AddStepper from './AddStepper';
 
-interface AddGroupProps {
-  filterHandler?: (type: 'cui' | 'die' | 'dif', id: string) => void;
-  cleanHandler?: () => void;
-};
 
-const AddGroup: FC<AddGroupProps> = ({
-  filterHandler, 
-  cleanHandler
-}) => {
+const AddGroup: FC = () => {
   const [modalOpened, setModalOpened] = useState(false);
 
   return (

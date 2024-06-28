@@ -18,14 +18,12 @@ const Default: FC<DefaultProps> = ({mainSlot}) => {
   return (
     <AppShell
       transitionTimingFunction="ease-in-out"
-      // header={{height: 100}}
       header={{ height: 100, collapsed: !pinned, offset: true }}
       navbar={{
         width: 300,
         breakpoint: 'sm',
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
-      // footer={{height: 100}}
       footer={{ height: 100, collapsed: pinned, offset: true }}
       padding="md"
     >
