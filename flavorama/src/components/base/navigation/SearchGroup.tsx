@@ -14,8 +14,8 @@ import {IconSearch, IconTrash} from '@tabler/icons-react';
 interface SearchGroupProps {
   model: string,
   changeHandler: Dispatch<SetStateAction<string>>;
-  cancelHandler: () => void;
-  searchHandler: () => void;
+  cancelHandler: () => void,
+  searchHandler: () => void
 };
 
 const SearchGroup: FC<SearchGroupProps> = ({model, changeHandler, cancelHandler, searchHandler}) => (

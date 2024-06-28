@@ -1,4 +1,5 @@
 import {FC, useState} from 'react';
+import type {AxiosError} from 'axios';
 import {
   Button,
   Stepper,
@@ -6,27 +7,23 @@ import {
   Dialog,
   Alert
 } from '@mantine/core';
-import type {FileWithPath} from '@mantine/dropzone';
 import {useDisclosure} from '@mantine/hooks';
+import type {FileWithPath} from '@mantine/dropzone';
 import {
   IconArrowBack,
   IconArrowForward,
   IconInfoCircle
 } from '@tabler/icons-react';
 import {postRecipes} from '@/server/Recipes';
-import useStoreRecipe from '@/store/recipe';
 import FirstStep from './FirstStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
 import FinalStep from './FinalStep';
-import {AxiosError} from 'axios';
 
 const AddStepper: FC = () => {
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
-
-  const recipeStore = useStoreRecipe();
 
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState<string[]>([]);

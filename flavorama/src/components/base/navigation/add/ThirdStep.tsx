@@ -17,18 +17,17 @@ import '@mantine/dropzone/styles.css';
 interface ThirdStepProps {
   files: FileWithPath[],
   filesSet: React.Dispatch<React.SetStateAction<FileWithPath[]>>
-  setBase64String: React.Dispatch<React.SetStateAction<string>>,
+  setBase64String: React.Dispatch<React.SetStateAction<string>>
 };
 
 const ThirdStep: FC<ThirdStepProps> = ({
   files,
   filesSet,
-  setBase64String,
+  setBase64String
 }) => {
   const openRef = useRef<() => void>(null);
 
   useEffect(() => {
-    console.log('files data:', files);
     if (files.length > 0) {
       const file = files[0];
 
@@ -111,7 +110,7 @@ const ThirdStep: FC<ThirdStepProps> = ({
 export default ThirdStep;
 
 interface PreviewProps {
-  image: FileWithPath,
+  image: FileWithPath
 };
 
 const Preview: FC<PreviewProps> = ({ image }) => {

@@ -19,8 +19,8 @@ import useStoreDifficulty from '@/store/difficulty';
 import FilterBtn from './FilterBtn';
 
 interface FilterGroupProps {
-  filterHandler: (type: 'cui' | 'die' | 'dif', id: string) => void;
-  cleanHandler: () => void;
+  filterHandler: (type: 'cui' | 'die' | 'dif', id: string) => void,
+  cleanHandler: () => void
 };
 
 const FilterGroup: FC<FilterGroupProps> = ({

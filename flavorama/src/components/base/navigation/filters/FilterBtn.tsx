@@ -10,12 +10,11 @@ import {
   IconHourglassEmpty,
 } from '@tabler/icons-react';
 
-
 interface FilterBtnProps {
   type: 'cuisine' | 'diet' | 'difficulty',
   id: string,
   label: string,
-  clickHandler: () => void;
+  clickHandler: () => void
 };
 
 const FilterBtn: FC<FilterBtnProps> = ({

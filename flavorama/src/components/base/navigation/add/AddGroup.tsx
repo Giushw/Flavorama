@@ -6,11 +6,8 @@ import {
   Title,
   Box,
 } from '@mantine/core';
-import {
-  IconPlus,
-} from '@tabler/icons-react';
+import {IconPlus} from '@tabler/icons-react';
 import AddStepper from './AddStepper';
-
 
 const AddGroup: FC = () => {
   const [modalOpened, setModalOpened] = useState(false);
