@@ -44,7 +44,7 @@ const LogoGroup: FC<LogoGroupProps> = ({mb, w, h, fs, hl, ht, col}) => {
           hue: 'jet.1'
         };
     }
-  }
+  };
 
   return (
     <Group mb={mb ?? 0}>

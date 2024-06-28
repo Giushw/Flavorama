@@ -1,5 +1,6 @@
 import {FC, useState} from 'react';
 import {Link} from "react-router-dom";
+import type {AxiosError} from 'axios';
 import {
   Grid,
   Stack,
@@ -22,14 +23,18 @@ import {
   Dialog,
   Alert
 } from '@mantine/core';
-import {apiPath} from '@/server/client';
-import type {Comments, Recipe} from '@/types/decoders/recipes';
-import BadgeId, {type DifficultiesType} from '../common/BadgeId';
-import {dateParsed, getRandomIntBetween} from '@/libs/utils';
-import {IconArrowBack, IconArrowForward, IconInfoCircle, IconPlus} from '@tabler/icons-react';
-import {postRecipeComment} from '@/server/Recipes';
 import {useDisclosure} from '@mantine/hooks';
-import { AxiosError } from 'axios';
+import {
+  IconArrowBack,
+  IconArrowForward,
+  IconInfoCircle,
+  IconPlus
+} from '@tabler/icons-react';
+import type {Comments, Recipe} from '@/types/decoders/recipes';
+import {apiPath} from '@/server/client';
+import {postRecipeComment} from '@/server/Recipes';
+import {dateParsed, getRandomIntBetween} from '@/libs/utils';
+import BadgeId, {type DifficultiesType} from '../common/BadgeId';
 
 interface RecipeInfoProps {
   data: Recipe | null,
@@ -38,129 +43,128 @@ interface RecipeInfoProps {
   cLoading: boolean,
 };
 
-const RecipeInfo: FC<RecipeInfoProps> = ({data, loading , cData, cLoading}) => { 
-  return (
-    <Stack gap="lg">
+const RecipeInfo: FC<RecipeInfoProps> = ({
+  data,
+  loading,
+  cData,
+  cLoading
+}) => (
+  <Stack gap="lg">
 
-    <Link to='/search' style={{ color: 'var(--mantine-color-smoke-1'}}>
-      <Text size='xl' c={'smoke.1'}>
-        Go back
-      </Text>
-    </Link>
+  <Link to='/search' style={{ color: 'var(--mantine-color-smoke-1'}}>
+    <Text size='xl' c={'smoke.1'}>
+      Go back
+    </Text>
+  </Link>
 
-      {(loading || !data) &&
-        <ViewSkeleton />
-      }
+    {(loading || !data) &&
+      <ViewSkeleton />
+    }
 
-      {data &&
-        <>
-          <ViewRecipe element={data} />
+    {data &&
+      <>
+        <ViewRecipe element={data} />
 
-          {(!cLoading && cData) &&
-            <Comments elements={cData} rId={data.id} />
-          }
-        </>
-      }
-    </Stack>
-  )
-};
+        {(!cLoading && cData) &&
+          <Comments elements={cData} rId={data.id} />
+        }
+      </>
+    }
+  </Stack>
+);
 
 export default RecipeInfo;
 
-const ViewSkeleton: FC = () => {
-  return (
-    <>
-      <Stack>
-        <Skeleton height={350} radius="lg" mb='xl' />
+const ViewSkeleton: FC = () => (
+  <>
+    <Stack>
+      <Skeleton height={350} radius="lg" mb='xl' />
 
-        <Skeleton height={20} radius="lg" mb='md' width={'50%'}/>
+      <Skeleton height={20} radius="lg" mb='md' width={'50%'}/>
 
-          <Stack align='flex-end' justify='flex-end' mb='xl'>
-            <Skeleton height={8} radius="lg" width={'40%'} />
-            <Skeleton height={8} radius="lg" width={'40%'} />
-            <Skeleton height={8} radius="lg" width={'40%'} />
-          </Stack>
+        <Stack align='flex-end' justify='flex-end' mb='xl'>
+          <Skeleton height={8} radius="lg" width={'40%'} />
+          <Skeleton height={8} radius="lg" width={'40%'} />
+          <Skeleton height={8} radius="lg" width={'40%'} />
+        </Stack>
 
-          <Stack>
-            <Skeleton height={8} radius="lg" />
-            <Skeleton height={8} radius="lg" />
-            <Skeleton height={8} radius="lg" />
-            <Skeleton height={8} radius="lg" width={'70%'} />
-          </Stack>
-      </Stack>
-    </>
-  );
-};
+        <Stack>
+          <Skeleton height={8} radius="lg" />
+          <Skeleton height={8} radius="lg" />
+          <Skeleton height={8} radius="lg" />
+          <Skeleton height={8} radius="lg" width={'70%'} />
+        </Stack>
+    </Stack>
+  </>
+);
 
 interface ViewRecipeProps {
   element: Recipe
 };
 
-const ViewRecipe: FC<ViewRecipeProps> = ({element}) => {
-  return (
-    <Stack gap="md" align='center'>
-      <BackgroundImage
-        src={`${apiPath}${element.image}`}
-        w={'100%'} 
-        h={350}
-        radius='lg'
-        mb='lg'
+const ViewRecipe: FC<ViewRecipeProps> = ({element}) => (
+  <Stack gap="md" align='center'>
+    <BackgroundImage
+      src={`${apiPath}${element.image}`}
+      w={'100%'} 
+      h={350}
+      radius='lg'
+      mb='lg'
+    >
+      <Stack
+        h={'100%'}
+        align="center"
+        justify="flex-end"
+        style={{
+          background: 'linear-gradient(0deg, rgba(17,17,17,1) 0%, rgba(47,47,47,0.1) 50%)'
+        }}
       >
-        <Stack
-          h={'100%'}
-          align="center"
-          justify="flex-end"
-          style={{
-            background: 'linear-gradient(0deg, rgba(17,17,17,1) 0%, rgba(47,47,47,0.1) 50%)'
-          }}
-        >
-          <Title order={3} size={'3rem'} mb={10} c='hunyadi.3'>
-            {element.name}
-          </Title>
-        </Stack>
-      </BackgroundImage>
+        <Title order={3} size={'3rem'} mb={10} c='hunyadi.3'>
+          {element.name}
+        </Title>
+      </Stack>
+    </BackgroundImage>
 
-      <Paper shadow="xs" radius="lg" p="xl" bg='jet.1' w={'100%'}>
-        <Group align='center' justify='space-evenly'>
-          <BadgeId big type='cuisine' id={element.cuisineId} />
-          <BadgeId big type='diet' id={element.dietId} />
-          <BadgeId big type='difficulty' id={element.difficultyId as DifficultiesType} />
-        </Group>
-      </Paper>
+    <Paper shadow="xs" radius="lg" p="xl" bg='jet.1' w={'100%'}>
+      <Group align='center' justify='space-evenly'>
+        <BadgeId big type='cuisine' id={element.cuisineId} />
+        <BadgeId big type='diet' id={element.dietId} />
+        <BadgeId big type='difficulty' id={element.difficultyId as DifficultiesType} />
+      </Group>
+    </Paper>
+    
+    <Grid columns={4} w={'100%'} bg='jet.1' style={{ borderRadius: 25}}>
+      <Grid.Col span={{ base: 1, md: 3 }} >
+        <Paper shadow="xs" radius="lg" p="xl" bg='jet.1'>
+          <Text c={'hunyadi.3'}>Procedure:</Text>
+          <Text size='xl'>
+            {element.instructions}
+          </Text>
+        </Paper>
+      </Grid.Col>
       
-      <Grid columns={4} w={'100%'} bg='jet.1' style={{ borderRadius: 25}}>
-        <Grid.Col span={{ base: 1, md: 3 }} >
-          <Paper shadow="xs" radius="lg" p="xl" bg='jet.1'>
-            <Text c={'hunyadi.3'}>Procedure:</Text>
-            <Text size='xl'>
-              {element.instructions}
-            </Text>
-          </Paper>
-        </Grid.Col>
-        
-        <Grid.Col span={1} h={'100%'}>
-          <Paper shadow="xs" radius="lg" p="xl" bg='jet.1'>
-            <Text c={'hunyadi.3'} mb='md'>Ingredients:</Text>
-            <List>
-              {
-                element.ingredients.map((el, i) => 
-                  <List.Item key={i}>{el}</List.Item>
-                )
-              }
-            </List>
-          </Paper>
-        </Grid.Col>
-      </Grid>
-    </Stack>
-  );
-};
+      <Grid.Col span={1} h={'100%'}>
+        <Paper shadow="xs" radius="lg" p="xl" bg='jet.1'>
+          <Text c={'hunyadi.3'} mb='md'>Ingredients:</Text>
+          <List>
+            {
+              element.ingredients.map((el, i) => 
+                <List.Item key={i}>{el}</List.Item>
+              )
+            }
+          </List>
+        </Paper>
+      </Grid.Col>
+    </Grid>
+  </Stack>
+);
 
 interface CommentsProps {
   elements: Comments,
   rId: string
 };
 
-interface Alert {
+interface CustAlert {
   status: number,
   code: string,
   message: string
@@ -173,7 +177,7 @@ const Comments: FC<CommentsProps> = ({elements, rId}) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
-  const [alertMsg, setAlertMsg] = useState<Alert | null>(null);
+  const [alertMsg, setAlertMsg] = useState<CustAlert | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
 
   const srcBuilder = () => {
@@ -357,4 +361,3 @@ const Comments: FC<CommentsProps> = ({elements, rId}) => {
     </Stack>
   );
 };
-
