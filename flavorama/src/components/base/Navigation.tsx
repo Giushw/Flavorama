@@ -4,13 +4,13 @@ import {
   Divider,
   Text
 } from '@mantine/core';
-import useStoreRecipe from '@/store/recipe';
 import {
   getRecipes,
   getRecipesByCuisine,
   getRecipesByDiet,
   getRecipesByDifficulty
 } from '@/server/Recipes';
+import useStoreRecipe from '@/store/recipe';
 import SearchGroup from './navigation/SearchGroup';
 import FilterGroup from './navigation/filters/FilterGroup';
 import AddGroup from './navigation/add/AddGroup';

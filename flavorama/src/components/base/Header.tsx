@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import {Link} from "react-router-dom";
 import {Group, Burger} from '@mantine/core';
 import LogoGroup from '@/components/common/LogoGroup';
 
@@ -19,7 +20,10 @@ const Header: FC<HeaderProps> = ({mState, dState, mHandle, dHandle, burgherDisab
           <Burger opened={dState} onClick={dHandle} visibleFrom="sm" size="md" />
         </>
       }
-      <LogoGroup hl fs={3} aria-label='Logo Flavorama' />
+      
+      <Link to="/" style={{ textDecoration: 'none'}}>
+        <LogoGroup hl fs={3} aria-label='Logo Flavorama' />
+      </Link>
     </Group>
   )
 };

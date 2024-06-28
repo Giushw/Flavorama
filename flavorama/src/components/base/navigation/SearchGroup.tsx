@@ -18,40 +18,38 @@ interface SearchGroupProps {
   searchHandler: () => void;
 };
 
-const SearchGroup: FC<SearchGroupProps> = ({model, changeHandler, cancelHandler, searchHandler}) => {
-  return (
-    <Stack bg={'jet.1'} style={{borderRadius: 25}} px={15} py={25}>
-      <Textarea
-        size="md"
-        radius="lg"
-        mb="sm"
-        placeholder="What do you fancy today?"
-        value={model}
-        onChange={(event) => changeHandler(event.currentTarget.value)}
-      />
+const SearchGroup: FC<SearchGroupProps> = ({model, changeHandler, cancelHandler, searchHandler}) => (
+  <Stack bg={'jet.1'} style={{borderRadius: 25}} px={15} py={25}>
+    <Textarea
+      size="md"
+      radius="lg"
+      mb="sm"
+      placeholder="What do you fancy today?"
+      value={model}
+      onChange={(event) => changeHandler(event.currentTarget.value)}
+    />
 
-      <Group justify="center">
-        <Button 
-          radius={'md'}
-          autoContrast 
-          color={'smoke.1'}
-          leftSection={<IconTrash size={16} />}
-          onClick={cancelHandler}
-        >
-          Cancel
-        </Button>
+    <Group justify="center">
+      <Button 
+        radius={'md'}
+        autoContrast 
+        color={'smoke.1'}
+        leftSection={<IconTrash size={16} />}
+        onClick={cancelHandler}
+      >
+        Cancel
+      </Button>
 
-        <Button 
-          radius={'md'}
-          autoContrast
-          leftSection={<IconSearch size={16} />}
-          onClick={searchHandler}
-        >
-          Search
-        </Button>
-      </Group>
-    </Stack>
-  );
-};
+      <Button 
+        radius={'md'}
+        autoContrast
+        leftSection={<IconSearch size={16} />}
+        onClick={searchHandler}
+      >
+        Search
+      </Button>
+    </Group>
+  </Stack>
+);
 
 export default SearchGroup;
