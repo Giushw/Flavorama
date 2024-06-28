@@ -19,9 +19,10 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
-    "@mantine/colors-generator": "^7.10.2",
-    "@mantine/core": "7.10.2",
-    "@mantine/hooks": "7.10.2",
+    "@mantine/colors-generator": "^7.11.0",
+    "@mantine/core": "7.11.0",
+    "@mantine/dropzone": "^7.11.0",
+    "@mantine/hooks": "7.11.0",
     "@tabler/icons-react": "^3.6.0",
     "axios": "^1.7.2",
     "chroma-js": "^2.4.2",

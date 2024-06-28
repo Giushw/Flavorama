@@ -1,10 +1,8 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {
-  Text,
   Accordion,
   rem,
   SimpleGrid,
-  UnstyledButton,
   ScrollArea,
   Stack,
   Button
@@ -18,6 +16,7 @@ import {
 import useStoreCuisine from '@/store/cuisine';
 import useStoreDiet from '@/store/diet';
 import useStoreDifficulty from '@/store/difficulty';
+import FilterBtn from './FilterBtn';
 
 interface FilterGroupProps {
   filterHandler: (type: 'cui' | 'die' | 'dif', id: string) => void;
@@ -132,77 +131,3 @@ const FilterGroup: FC<FilterGroupProps> = ({
 };
 
 export default FilterGroup;
-
-interface FilterBtnProps {
-  type: 'cuisine' | 'diet' | 'difficulty',
-  id: string,
-  label: string,
-  clickHandler: () => void;
-};
-
-const FilterBtn: FC<FilterBtnProps> = ({
-  type, 
-  label, 
-  clickHandler
-}) => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <UnstyledButton 
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 20,
-        height: rem(90),
-        transition: 'background-color 0.3s ease',
-        backgroundColor: hovered
-          ? 'var(--mantine-color-hunyadi-3)'
-          : 'var(--mantine-color-smoke-1)'
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={clickHandler}
-    >
-
-      {type === 'cuisine' &&
-        <IconFlag 
-          size="2rem"
-          style={{ 
-            transition: 'color 0.3s ease',
-            color: hovered 
-              ? 'var(--mantine-color-jet-1)' 
-              : 'var(--mantine-color-hunyadi-6)'
-          }} 
-        />
-      }
-
-      {type === 'diet' &&
-        <IconApple
-          size="2rem"
-          style={{ 
-            transition: 'color 0.3s ease',
-            color: hovered 
-              ? 'var(--mantine-color-jet-1)' 
-              : 'var(--mantine-color-hunyadi-6)'
-          }} 
-        />
-      }
-
-      {type === 'difficulty' &&
-        <IconHourglassEmpty 
-          size="2rem"
-          style={{ 
-            transition: 'color 0.3s ease',
-            color: hovered 
-              ? 'var(--mantine-color-jet-1)' 
-              : 'var(--mantine-color-hunyadi-6)'
-          }} 
-        />
-      }
-
-      <Text size="xs" fw={500} mt={5} c={'jet.1'} >{label}</Text>
-    </UnstyledButton>
-  );
-};

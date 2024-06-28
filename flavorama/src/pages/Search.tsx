@@ -1,9 +1,9 @@
-import {FC, useState, useEffect} from 'react';
-import {getRecipes} from '@/server/Recipes';
+import {FC, useEffect} from 'react';
 import useStoreRecipe from '@/store/recipe';
 import useStoreCuisine from '@/store/cuisine';
 import useStoreDiet from '@/store/diet';
 import useStoreDifficulty from '@/store/difficulty';
+import {getRecipes} from '@/server/Recipes';
 import {getCuisines} from '@/server/Cuisines';
 import {getDifficulties} from '@/server/Difficulties';
 import {getDiets} from '@/server/Diets';
@@ -26,14 +26,6 @@ const Search: FC = () => {
         console.error('error: ', error);
       })
       .finally(() => recipeStore.updateLoading(false));
-
-    // getRecipeComments('1')
-    //   .then((data) => {
-    //     setComments(data);
-    //   })
-    //   .catch((error: Error) => {
-    //     console.error('error: ', error);
-    //   });
 
     getCuisines()
       .then((data) => {
@@ -65,11 +57,12 @@ const Search: FC = () => {
         console.error('error: ', error);
       })
       .finally(() => difficultyStore.updateLoading(false));
-
   }, []);
 
   return (
-    <Default mainSlot={<CardList data={recipeStore.recipes} loading={recipeStore.loading} />} />
+    <Default mainSlot={
+      <CardList data={recipeStore.recipes} loading={recipeStore.loading} 
+    />} />
   )
 };
 
