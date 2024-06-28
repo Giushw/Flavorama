@@ -15,8 +15,8 @@ export interface Comment {
   id: string,
   recipeId: string,
   comment: string,
-  rating: number // from 0 to 5
-  date: string // datestring
+  rating: number 
+  date: string
 };
 
 export type Comments = Comment[] ;

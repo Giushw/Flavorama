@@ -10,6 +10,7 @@ type BadgeType = 'cuisine' | 'diet';
 interface CommonIdProps {
   type: BadgeType;
   id: string;
+  big?: boolean
 };
 
 export type DifficultiesType = 'Easy' | 'Medium' | 'Hard';
@@ -17,11 +18,12 @@ export type DifficultiesType = 'Easy' | 'Medium' | 'Hard';
 interface DifficultyIdProps {
   type: 'difficulty';
   id: DifficultiesType;
+  big?: boolean
 };
 
 type BadgeIdProps = CommonIdProps | DifficultyIdProps;
 
-const BadgeId: FC<BadgeIdProps> = ({type, id}) => {
+const BadgeId: FC<BadgeIdProps> = ({type, id, big}) => {
   const cuisineStore = useStoreCuisine();
   const dietStore = useStoreDiet();
   const difficultyStore = useStoreDifficulty();
@@ -94,7 +96,7 @@ const BadgeId: FC<BadgeIdProps> = ({type, id}) => {
     <Badge 
       autoContrast
       variant="filled"
-      size="md"
+      size={big ? 'lg' : 'md'}
       leftSection={parseIconType()}
       color={parseColor()}
     >

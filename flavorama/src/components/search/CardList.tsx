@@ -59,25 +59,25 @@ const GridSkeleton: FC = () => {
   return (
     <Grid>
       <Grid.Col span={{ base: 12, xs: 4 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 8 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 8 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 4 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 3 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 3 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
         </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 6 }}>
-        <Skeleton height={160} radius="md" animate />
+        <Skeleton height={160} radius="md" />
       </Grid.Col>
     </Grid>
   );
